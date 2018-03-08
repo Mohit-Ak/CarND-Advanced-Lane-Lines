@@ -9,6 +9,14 @@
 [image6]: ./examples/example_output.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
 [image10]: ./output_images/banner.png "Banner"
+[image10]: ./output_images/Straight_Lines1_Output.jpg "Straight_Lines1_Output"
+[image11]: ./output_images/Straight_Lines2_Output.jpg "Straight_Lines2_Output"
+[image12]: ./output_images/Test1_Output.jpg "Test1_Output"
+[image13]: ./output_images/Test2_Output.jpg "Test2_Output"
+[image14]: ./output_images/Test3_Output.jpg "Test3_Output"
+[image15]: ./output_images/Test4_Output.jpg "Test4_Output"
+[image16]: ./output_images/Test5_Output.jpg "Test5_Output"
+[image17]: ./output_images/Test6_Output.jpg "Test6_Output"
 
 
 ## Advanced Lane Finding
@@ -16,7 +24,7 @@
 
 ![banner][image10]
 
-### In this project, your goal is to write a software pipeline to identify the lane boundaries in a video.
+### Goal - To identify the road lane boundaries in the video of a camera attached to the car.
 ---
 
 **Advanced Lane Finding Project**
@@ -32,23 +40,18 @@ The goals / steps of this project are the following:
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
-## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
-
-### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
-
----
-
-### Writeup / README
-
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
-
-You're reading it!
-
 ### Camera Calibration
 
-#### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
-
-The code for this step is contained in the first code cell of the IPython notebook located in "./examples/example.ipynb" (or in lines # through # of the file called `some_file.py`).  
+#### 1. Steps and Inference
+- Chessboard doesn't have a depth/height and is fixed on the (x, y) plane at z=0 ### Steps
+- Calculate object points and image points.
+- "object points", which will be the (x, y, z) coordinates of the chessboard corners in a perfect scenario.
+- img_points will be appended with the (x, y) pixel position of each of the corners in the image.
+- Note - Chessboard size is 9x6
+- Method ``` cv2.findChessboardCorners ``` used to find corners
+- Method ```cv2.drawChessboardCorners``` used to draw the corner
+- Method ``` cv2.calibrateCamera``` used to calibrate camera
+- Around three images fail in calibration.
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
