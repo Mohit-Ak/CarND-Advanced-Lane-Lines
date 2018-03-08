@@ -21,6 +21,9 @@
 [image19]: ./output_images/distortion_removal_1.png "Distortion Removal 1"
 [image20]: ./output_images/distortion_removal_2.png "Distortion Removal 2"
 [image21]: ./output_images/image_channels.png "Image Channels"
+[image22]: ./output_images/thresholds.png "Thresholds"
+[image23]: ./output_images/pipeline_threshold.png "Pipeline Threshold"
+[image24]: ./output_images/perspective.png "Perspecive Transform"
 
 
 
@@ -46,6 +49,7 @@ The goals / steps of this project are the following:
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
 ### Camera Calibration
+#### Code - Section 2 ``` advanced_lane_detection.ipynb```
 
 #### 1. Steps and Inference
 - Chessboard doesn't have a depth/height and is fixed on the (x, y) plane at z=0 ### Steps
@@ -67,7 +71,7 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 ### Pipeline (single images)
 
 #### 1. Distortion Removal
-
+#### Code - Section 3 ``` advanced_lane_detection.ipynb```
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
 
  **CHESS BOARD**                     |  **CAR CAM** 
@@ -75,25 +79,28 @@ To demonstrate this step, I will describe how I apply the distortion correction 
  ![Distortion Removal][image19] |  ![Distortion Removal][image20]
 
 #### 2. Image Channels
+#### Code - Section 5 ``` advanced_lane_detection.ipynb```
 - Tried a number of image channels to see which ones are best suited for lane detection-
 ![image_channels][image21]
 
 #### 3. Gradient and Color threholds
+#### Code - Section 6 ``` advanced_lane_detection.ipynb```
 - Experimented different gradient and color threshlolds to detect different color lane lines.
+![Thresholding][image22]
+
 - Realized that the following approaches work well.
 * Sobel x operator.
 * Saturation of HLS channel.
 * Hue of HLS channel.
 
+I used a combination of the above mentioned color and gradient thresholds to generate a binary image.  Here's an example of my output for this step.
+
+![pipeline_threshold][image23]
 
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
-
-
-
-#### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
-
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+#### 4. Perspective Transform
+#### Code - Section 8 ``` advanced_lane_detection.ipynb```
+The code for my perspective transform includes a function called `perspective_transform()`,  The `perspective_transform()` function takes as inputs an image (`img`), and also the hardcoded source (`src`) and destination (`dst`) points to calculate the transform.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
 src = np.float32(
@@ -112,14 +119,14 @@ This resulted in the following source and destination points:
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
+| 170, 720      | 100, 720        | 
+| 2550, 460      | 100, 0      |
+| 745, 460     | 1100, 0     |
+| 1200, 720      | 1100, 720      |
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![alt text][image4]
+![Perspective Transform][image24]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
