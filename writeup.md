@@ -35,7 +35,8 @@
 
 ![banner][image10]
 
-### Goal - To identify the road lane boundaries in the video of a camera attached to the car.
+### Goal
+- To identify the road lane boundaries in the video of a camera attached to the car.
 ---
 
  **OUTPUT**             
@@ -183,7 +184,7 @@ The position of the vehicle with respect to the center of the lane is calculated
 
 #### 6. RESULTS
 #### Code - Section 11 ``` advanced_lane_detection.ipynb```
-Here is an example of my result on a test image:
+Here are my results on the test images provided by Udacity.
 
 ![individual_outputs][image28]
 
