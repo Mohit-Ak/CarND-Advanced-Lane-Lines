@@ -7,7 +7,6 @@
 [image4]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
 [image6]: ./examples/example_output.jpg "Output"
-[video1]: ./project_video.mp4 "Video"
 [image10]: ./output_images/banner.png "Banner"
 [image10]: ./output_images/Straight_Lines1_Output.jpg "Straight_Lines1_Output"
 [image11]: ./output_images/Straight_Lines2_Output.jpg "Straight_Lines2_Output"
@@ -28,6 +27,7 @@
 [image26]: ./output_images/histogram.png "Histogram"
 [image27]: ./output_images/sliding_window.png "Sliding Window"
 [image28]: ./output_images/individual_outputs.png "Individual Outputs"
+[video1]: ./project_video.mp4 "Video"
 
 
 ## Advanced Lane Finding
@@ -191,14 +191,23 @@ Here is an example of my result on a test image:
 
 ### Pipeline (video)
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
-
-Here's a [link to my video result](./project_video.mp4)
-
+Here's a [link to my video result](./output.mp4)
+ 
+ **OUTPUT**             
+ :-------------------------:|
+ ![Advanced Lane Detection][image25] | 
 ---
 
 ### Discussion
-
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
-
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+- There was no direct solution to extract the lanes. I had to try different combinations and thresholds.
+- Perspective transform values for SRC and DST had to be hadrcoded and experimented. It would be nice to have that part automated too.
+- Considered only for 2 lines. There are cases where roads have markings inbetween which are similar to a line. It will be interesting to tackle those scenarios.
+- Challenge video fails as it has 3 lines from histogram peak.
+- **SNOW** I am from Buffalo, NY and this is out of experience. When the roads are shoveled after a snow, there are thin lines of snow left inbetween which look very similar to the lanes. The algorithm must identify and distinguish them from the actual lanes.
+## Other techniques to experiment
+- Smoothing/averaging
+- Different Color channels
+- Explore different way of removing pixel noise.
+- Low pass filtering.
+- Laplacian filters
+- Convolutions instead of histgram
