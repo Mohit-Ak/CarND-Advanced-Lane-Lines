@@ -24,6 +24,7 @@
 [image22]: ./output_images/thresholds.png "Thresholds"
 [image23]: ./output_images/pipeline_threshold.png "Pipeline Threshold"
 [image24]: ./output_images/perspective.png "Perspecive Transform"
+[image25]: ./output_images/advanced_lane_detection.gif "Output"
 
 
 
@@ -35,8 +36,13 @@
 ### Goal - To identify the road lane boundaries in the video of a camera attached to the car.
 ---
 
+ **OUTPUT**             
+ :-------------------------:|
+ ![Advanced Lane Detection][image25] | 
+ 
 **Advanced Lane Finding Project**
 
+ 
 The goals / steps of this project are the following:
 
 * Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
@@ -47,6 +53,9 @@ The goals / steps of this project are the following:
 * Determine the curvature of the lane and vehicle position with respect to center.
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
+
+### CODE 
+https://github.com/Mohit-Ak/CarND-Advanced-Lane-Lines/blob/master/advanced_lane_detection.ipynb
 
 ### Camera Calibration
 #### Code - Section 2 ``` advanced_lane_detection.ipynb```
@@ -128,7 +137,9 @@ I verified that my perspective transform was working as expected by drawing the 
 
 ![Perspective Transform][image24]
 
-#### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+#### 4. Identified lane-line pixels
+#### Code - Section 9 ``` advanced_lane_detection.ipynb```
+
 
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 
