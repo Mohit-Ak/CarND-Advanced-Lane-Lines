@@ -37,7 +37,6 @@
 
 ### Goal
 - To identify the road lane boundaries in the video of a camera attached to the car.
----
 
  **OUTPUT**             
  :-------------------------:|
