@@ -25,6 +25,8 @@
 [image23]: ./output_images/pipeline_threshold.png "Pipeline Threshold"
 [image24]: ./output_images/perspective.png "Perspecive Transform"
 [image25]: ./output_images/advanced_lane_detection.gif "Output"
+[image26]: ./output_images/histogram.png "Histogram"
+[image27]: ./output_images/sliding_window.png "Sliding Window"
 
 
 
@@ -138,16 +140,23 @@ I verified that my perspective transform was working as expected by drawing the 
 ![Perspective Transform][image24]
 
 #### 4. Identified lane-line pixels
-#### Code - Section 9 ``` advanced_lane_detection.ipynb```
+#### Code - Section 9 & 10``` advanced_lane_detection.ipynb```
 
+*Steps*
+- Take the histogram of the binary thresholded perspetive transformed image. It would give us two spikes for the two lanes present as the total vertical "white" concentration at those regions is higher thatn the rest of the image.
+- Use the bottom white points as the starting points and use the sliding window technique to detect the first set of lines.
+- Once the first set is detected, we can remember them to concentrate our ROI on the next image which is input instead of doing the histogram again.
+- We also remember and average over the past values to remove any camera errors.
+- Method ```sliding_window_polynomial_fit``` ultimately indentifies the lane with a 2D polynomial(A Parabola).
+- ```polynomialfit_from_previous``` also indentifies the lane with a 2D polynomial(A Parabola).
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+ **Histogram**                     |  **Sliding Window** 
+ :-------------------------:|:-------------------------:
+ ![Histogram][image26] |  ![Sliding Window][image27]
 
-![alt text][image5]
-
-#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
-
-I did this in lines # through # in my code in `my_other_file.py`
+#### 5.Radius of curvature of the lane and the position of the vehicle with respect to center.
+#### Code - Section 11 ``` advanced_lane_detection.ipynb```
+ ![Color_Fit Lines][image5]
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
