@@ -27,7 +27,7 @@
 [image25]: ./output_images/advanced_lane_detection.gif "Output"
 [image26]: ./output_images/histogram.png "Histogram"
 [image27]: ./output_images/sliding_window.png "Sliding Window"
-
+[image28]: ./output_images/individual_outputs.png "Individual Outputs"
 
 
 ## Advanced Lane Finding
@@ -155,7 +155,7 @@ I verified that my perspective transform was working as expected by drawing the 
  ![Histogram][image26] |  ![Sliding Window][image27]
 
 #### 5.Radius of curvature of the lane and the position of the vehicle with respect to center.
-#### Code - Section 11 ``` advanced_lane_detection.ipynb```
+#### Code - Section 10 ``` advanced_lane_detection.ipynb```
 - Method ``` get_curvature ```
 -  Define conversions in x and y from pixels space to meters
 - 720 px is length of the lane 
@@ -181,11 +181,11 @@ The position of the vehicle with respect to the center of the lane is calculated
 
 ![Color_Fit Lines][image5]
 
-#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+#### 6. RESULTS
+#### Code - Section 11 ``` advanced_lane_detection.ipynb```
+Here is an example of my result on a test image:
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
-
-![alt text][image6]
+![individual_outputs][image28]
 
 ---
 
