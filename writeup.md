@@ -25,6 +25,8 @@
 [image23]: ./output_images/pipeline_threshold.png "Pipeline Threshold"
 [image24]: ./output_images/perspective.png "Perspecive Transform"
 [image25]: ./output_images/advanced_lane_detection.gif "Output"
+[image26]: ./output_images/histogram.png "Histogram"
+[image27]: ./output_images/sliding_window.png "Sliding Window"
 
 
 
@@ -138,16 +140,46 @@ I verified that my perspective transform was working as expected by drawing the 
 ![Perspective Transform][image24]
 
 #### 4. Identified lane-line pixels
-#### Code - Section 9 ``` advanced_lane_detection.ipynb```
+#### Code - Section 9 & 10``` advanced_lane_detection.ipynb```
+
+*Steps*
+- Take the histogram of the binary thresholded perspetive transformed image. It would give us two spikes for the two lanes present as the total vertical "white" concentration at those regions is higher thatn the rest of the image.
+- Use the bottom white points as the starting points and use the sliding window technique to detect the first set of lines.
+- Once the first set is detected, we can remember them to concentrate our ROI on the next image which is input instead of doing the histogram again.
+- We also remember and average over the past values to remove any camera errors.
+- Method ```sliding_window_polynomial_fit``` ultimately indentifies the lane with a 2D polynomial(A Parabola).
+- ```polynomialfit_from_previous``` also indentifies the lane with a 2D polynomial(A Parabola).
+
+ **Histogram**                     |  **Sliding Window** 
+ :-------------------------:|:-------------------------:
+ ![Histogram][image26] |  ![Sliding Window][image27]
+
+#### 5.Radius of curvature of the lane and the position of the vehicle with respect to center.
+#### Code - Section 11 ``` advanced_lane_detection.ipynb```
+- Method ``` get_curvature ```
+-  Define conversions in x and y from pixels space to meters
+- 720 px is length of the lane 
+- 900 px is the average width of the lane
+- *Note* - The image under consideration is perspectively projected.
+- *Assumption* : Camera is mounted at the center of the car and therefore ``` vehicle_offset = deviation of midpoint of the lane is = the deviation from center of image ```
+- *Reference* : Jeremy shannon's Udacity notes
+- The radius of curvature is based upon [this website](http://www.intmath.com/applications-differentiation/8-radius-curvature.php) and calculated-
+```
+curve_radius = ((1 + (2*fit[0]*y_0*y_meters_per_pixel + fit[1])**2)**1.5) / np.absolute(2*fit[0])
+```
+In this example, `fit[0]` is the first coefficient (the y-squared coefficient) of the second order polynomial fit, and `fit[1]` is the second (y) coefficient. 
+- `y_0` is the y position within the image upon which the curvature calculation is based (the bottom-most y - the position of the car in the image - was chosen). 
+- `y_meters_per_pixel` is the factor used for converting from pixels to meters. 
 
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+The position of the vehicle with respect to the center of the lane is calculated with the following lines of code:
+```
+ car_position = width / 2
+ lane_center = (left_fitx[719] + right_fitx[719]) / 2
+ vehicle_offset = (lane_center-car_position)*xm_per_pix
+```
 
-![alt text][image5]
-
-#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
-
-I did this in lines # through # in my code in `my_other_file.py`
+![Color_Fit Lines][image5]
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
