@@ -156,7 +156,30 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 5.Radius of curvature of the lane and the position of the vehicle with respect to center.
 #### Code - Section 11 ``` advanced_lane_detection.ipynb```
- ![Color_Fit Lines][image5]
+- Method ``` get_curvature ```
+-  Define conversions in x and y from pixels space to meters
+- 720 px is length of the lane 
+- 900 px is the average width of the lane
+- *Note* - The image under consideration is perspectively projected.
+- *Assumption* : Camera is mounted at the center of the car and therefore ``` vehicle_offset = deviation of midpoint of the lane is = the deviation from center of image ```
+- *Reference* : Jeremy shannon's Udacity notes
+- The radius of curvature is based upon [this website](http://www.intmath.com/applications-differentiation/8-radius-curvature.php) and calculated-
+```
+curve_radius = ((1 + (2*fit[0]*y_0*y_meters_per_pixel + fit[1])**2)**1.5) / np.absolute(2*fit[0])
+```
+In this example, `fit[0]` is the first coefficient (the y-squared coefficient) of the second order polynomial fit, and `fit[1]` is the second (y) coefficient. 
+- `y_0` is the y position within the image upon which the curvature calculation is based (the bottom-most y - the position of the car in the image - was chosen). 
+- `y_meters_per_pixel` is the factor used for converting from pixels to meters. 
+
+
+The position of the vehicle with respect to the center of the lane is calculated with the following lines of code:
+```
+ car_position = width / 2
+ lane_center = (left_fitx[719] + right_fitx[719]) / 2
+ vehicle_offset = (lane_center-car_position)*xm_per_pix
+```
+
+![Color_Fit Lines][image5]
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
